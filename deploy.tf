@@ -27,9 +27,9 @@ resource "grafana_data_source" "influx_db_public" {
   url                 = var.influxdb_url
   database_name = "cloud"
   basic_auth_enabled  = true
-  basic_auth_username = var.influxdb_user
+  basic_auth_username = var.influxdb_public_user
   secure_json_data_encoded = jsonencode({
-    basicAuthPassword = var.influxdb_passwd
+    basicAuthPassword = var.influxdb_public_passwd
   })
 }
 
@@ -41,9 +41,9 @@ resource "grafana_data_source" "influx_db_private" {
   url                 = var.influxdb_url
   database_name = "cloud"
   basic_auth_enabled  = true
-  basic_auth_username = var.influxdb_user
+  basic_auth_username = var.influxdb_private_user
   secure_json_data_encoded = jsonencode({
-    basicAuthPassword = var.influxdb_passwd
+    basicAuthPassword = var.influxdb_private_passwd
   })
 }
 

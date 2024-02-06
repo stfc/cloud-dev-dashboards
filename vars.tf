@@ -1,12 +1,21 @@
-variable "influxdb_user" {
+variable "influxdb_public_user" {
   type = string
 }
 
-variable "influxdb_passwd" {
+variable "influxdb_public_passwd" {
   type = string
   sensitive = true
 }
 
 variable "influxdb_url" {
   type = string
+}
+
+variable "influxdb_private_user" {
+  type = string
+}
+
+variable "influxdb_private_passwd" {
+  type = string
+  sensitive = true
 }

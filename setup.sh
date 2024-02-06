@@ -12,3 +12,4 @@ apt-get install grafana
 apt-get install terraform
 
 cat grafana.ini >> /etc/grafana/grafana.ini
+systemctl restart grafana-server
