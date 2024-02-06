@@ -17,11 +17,12 @@ Current Dashboards:
 
 ## Terraform Provisioning Script
 ### About the configuration
-Terraform will create 2 different organisations: one public, one private.
-The public organisation will be the default organisation for unauthenticated access to the Grafana Server.
-The private organisation will require you to log in as admin and view from there.
-Dashboards from the public/private folders will be added to their respeective organisation.
-Currently when changing pages there is a chance that Grafana will redirect you to a page on localhost. This is an issue with the Grafana config and can be manually changed.
+Terraform will create 2 different organisations: one public, one private.<br>
+The public organisation will be the default organisation for unauthenticated access to the Grafana Server.<br>
+The private organisation will require you to log in as admin and view from there.<br>
+Dashboards from the public/private folders will be added to their respeective organisation.<br>
+Currently when changing pages there is a chance that Grafana will redirect you to a page on localhost. <br>
+This is an issue with the Grafana config and can be manually changed. <br>
 However, I have left this until we have a DNS record for the production Grafana instance.
 ### To use Terraform to provision the configuration of Grafana follow the below steps:
 1. Create an Ubuntu VM on the internal network

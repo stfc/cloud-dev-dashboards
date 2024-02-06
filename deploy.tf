@@ -47,6 +47,44 @@ resource "grafana_data_source" "influx_db_private" {
   })
 }
 
+resource "grafana_data_source" "opensearch_public" {
+  org_id = grafana_organization.public.id
+  name = "opensearch-public"
+  type = "elasticsearch"
+  uid = "opensearch"
+  url = var.opensearch_url
+  database_name = var.opensearch_index_pattern
+  basic_auth_enabled = true
+  basic_auth_username = var.opensearch_user
+  secure_json_data_encoded = jsonencode({
+    basicAuthPassword = var.opensearch_passwd
+  })
+  json_data_encoded = jsonencode({
+    time_field    = "@timestamp"
+    es_version    = "2.3.0"
+    time_interval = "10s"
+  })
+}
+
+resource "grafana_data_source" "opensearch_private" {
+  org_id = grafana_organization.private.id
+  name = "opensearch-private"
+  type = "elasticsearch"
+  uid = "opensearch"
+  url = var.opensearch_url
+  database_name = var.opensearch_index_pattern
+  basic_auth_enabled = true
+  basic_auth_username = var.opensearch_user
+  secure_json_data_encoded = jsonencode({
+    basicAuthPassword = var.opensearch_passwd
+  })
+  json_data_encoded = jsonencode({
+    time_field    = "@timestamp"
+    es_version    = "2.3.0"
+    time_interval = "10s"
+  })
+}
+
 resource "grafana_dashboard" "public_dashboard" {
   for_each = fileset(path.module, "dashboards/public/*.json")
   config_json = file("${path.module}/${each.key}")

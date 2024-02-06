@@ -12,4 +12,5 @@ apt-get install grafana
 apt-get install terraform
 
 cat grafana.ini >> /etc/grafana/grafana.ini
+/usr/share/grafana/bin/grafana cli plugins install grafana-opensearch-datasource
 systemctl restart grafana-server
