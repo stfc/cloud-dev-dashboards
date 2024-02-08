@@ -8,8 +8,8 @@ wget -O- https://apt.releases.hashicorp.com/gpg | gpg --dearmor | tee /usr/share
 gpg --no-default-keyring --keyring /usr/share/keyrings/hashicorp-archive-keyring.gpg --fingerprint
 echo "deb [signed-by=/usr/share/keyrings/hashicorp-archive-keyring.gpg] https://apt.releases.hashicorp.com $(lsb_release -cs) main" | tee /etc/apt/sources.list.d/hashicorp.list
 apt-get update
-apt-get install grafana
-apt-get install terraform
+apt-get install grafana -y
+apt-get install terraform -y
 
 cat grafana.ini >> /etc/grafana/grafana.ini
 /usr/share/grafana/bin/grafana cli plugins install grafana-opensearch-datasource
