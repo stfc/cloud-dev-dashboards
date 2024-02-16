@@ -1,4 +1,7 @@
 #!/bin/bash
+read -p "Enter the Domain name: " DOMAIN
+read -p "Enter the email to notifty about certs: " EMAIL
+
 apt-get install -y apt-transport-https software-properties-common wget
 mkdir -p /etc/apt/keyrings/
 wget -q -O - https://apt.grafana.com/gpg.key | gpg --dearmor | tee /etc/apt/keyrings/grafana.gpg > /dev/null
@@ -12,8 +15,18 @@ apt-get install grafana -y
 apt-get install terraform -y
 
 cat grafana.ini >> /etc/grafana/grafana.ini
-/usr/share/grafana/bin/grafana cli plugins install grafana-opensearch-datasource
-cat service_edit > /etc/systemd/system/grafana-server.service.d/override.conf
-
 systemctl daemon-reload
 systemctl restart grafana-server
+
+apt-get install snapd
+snap install core
+snap refresh core
+snap install --classic certbot
+ln -s /snap/bin/certbot /usr/bin/certbot
+certbot certonly --standalone --non-interactive -d $DOMAIN --email $EMAIL --agree-tos --no-eff-email
+ln -s /etc/letsencrypt/live/subdomain.mysite.com/privkey.pem /etc/grafana/grafana.key
+ln -s /etc/letsencrypt/live/subdomain.mysite.com/fullchain.pem /etc/grafana/grafana.crt
+chgrp -R grafana /etc/letsencrypt/*
+chmod -R g+rx /etc/letsencrypt/*
+chgrp -R grafana /etc/grafana/grafana.crt /etc/grafana/grafana.key
+chmod 400 /etc/grafana/grafana.crt /etc/grafana/grafana.key

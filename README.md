@@ -26,12 +26,14 @@ This is an issue with the Grafana config and can be manually changed. <br>
 However, I have left this until we have a DNS record for the production Grafana instance.
 ### To use Terraform to provision the configuration of Grafana follow the below steps:
 1. Create an Ubuntu VM on the internal network
+1. Allow traffic from 80 and 3000 to the VM with a Security Group
 1. Git clone this repository onto the VM: `git clone https://github.com/stfc/cloud-grafana-dashboards.git`
 1. Git checkout to switch to this branch: `git checkout kh-terraform-provisioning`
 1. Change directory to the git repo: `cd cloud-grafana-dashboards`
 1. Run the setup script to install Terraform and Grafana: `sudo bash setup.sh`
 1. Initialise Terraform in this directory: `terraform init`
-1. Plan the Terraform changes. Here you will need to input logins for both the public and private Influxdb users and URL: `terraform plan -out plan`
+1. Enter credentials for the datasources in `vars.tfvars`
+1. Plan the Terraform changes: `terraform plan -out plan -var-file=vars.tfvars`
 1. Then apply the changes: `terraform apply plan`
 
 
