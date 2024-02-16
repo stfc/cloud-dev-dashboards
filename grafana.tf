@@ -7,7 +7,7 @@ terraform {
   }
 }
 provider "grafana" {
-  url      = "http://localhost:3000"
+  url      = "https://stats.cloud.stfc.ac.uk:3000"
   auth = "admin:admin"
 }
 
