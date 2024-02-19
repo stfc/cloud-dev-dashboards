@@ -11,12 +11,8 @@ provider "grafana" {
   auth = "admin:admin"
 }
 
-resource "grafana_organization" "public" {
-  name         = "Public Org"
-}
-
 resource "grafana_organization" "private" {
-  name         = "Private Org"
+  name         = "Cloud"
 }
 
 resource "grafana_data_source" "influx_db_public" {

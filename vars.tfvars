@@ -1,6 +1,3 @@
-lb_float_ip = ""
-external_network_id = ""
-ssh_public_key_name = ""
 influxdb_public_user = ""
 influxdb_public_passwd = ""
 influxdb_url = ""

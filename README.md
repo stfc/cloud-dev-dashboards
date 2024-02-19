@@ -25,7 +25,7 @@ Currently when changing pages there is a chance that Grafana will redirect you t
 This is an issue with the Grafana config and can be manually changed. <br>
 However, I have left this until we have a DNS record for the production Grafana instance.
 ### To use Terraform to provision the configuration of Grafana follow the below steps:
-1. Create an Ubuntu VM on the internal network
+1. Create an Ubuntu VM on the private network
 1. Allow traffic from 80 and 3000 to the VM with a Security Group
 1. Git clone this repository onto the VM: `git clone https://github.com/stfc/cloud-grafana-dashboards.git`
 1. Git checkout to switch to this branch: `git checkout kh-terraform-provisioning`
