@@ -1,7 +1,6 @@
 #!/bin/bash
 DOMAIN="stats.cloud.stfc.ac.uk"
-read -p "Enter the email to notifty about certs: " EMAIL
-
+EMAIL="cloud-support@stfc.ac.uk"
 apt-get install -y apt-transport-https software-properties-common wget
 mkdir -p /etc/apt/keyrings/
 wget -q -O - https://apt.grafana.com/gpg.key | gpg --dearmor | tee /etc/apt/keyrings/grafana.gpg > /dev/null
@@ -13,11 +12,7 @@ echo "deb [signed-by=/usr/share/keyrings/hashicorp-archive-keyring.gpg] https://
 apt-get update
 apt-get install grafana -y
 apt-get install terraform -y
-
 cat grafana.ini >> /etc/grafana/grafana.ini
-systemctl daemon-reload
-systemctl restart grafana-server
-
 apt-get install snapd
 snap install core
 snap refresh core
@@ -30,3 +25,6 @@ chgrp -R grafana /etc/letsencrypt/*
 chmod -R g+rx /etc/letsencrypt/*
 chgrp -R grafana /etc/grafana/grafana.crt /etc/grafana/grafana.key
 chmod 400 /etc/grafana/grafana.crt /etc/grafana/grafana.key
+mkdir /etc/systemd/system/grafana-server.service.d
+cat override.ini > /etc/systemd/system/grafana-server.service.d/override.conf
+systemctl restart grafana-server.service
