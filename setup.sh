@@ -1,5 +1,5 @@
 #!/bin/bash
-read -p "Enter the Domain name: " DOMAIN
+DOMAIN = "stats.cloud.stfc.ac.uk"
 read -p "Enter the email to notifty about certs: " EMAIL
 
 apt-get install -y apt-transport-https software-properties-common wget
