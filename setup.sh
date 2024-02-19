@@ -24,8 +24,8 @@ snap refresh core
 snap install --classic certbot
 ln -s /snap/bin/certbot /usr/bin/certbot
 certbot certonly --standalone --non-interactive -d $DOMAIN --email $EMAIL --agree-tos --no-eff-email
-ln -s /etc/letsencrypt/live/subdomain.mysite.com/privkey.pem /etc/grafana/grafana.key
-ln -s /etc/letsencrypt/live/subdomain.mysite.com/fullchain.pem /etc/grafana/grafana.crt
+ln -s /etc/letsencrypt/live/$DOMAIN/privkey.pem /etc/grafana/grafana.key
+ln -s /etc/letsencrypt/live/$DOMAIN/fullchain.pem /etc/grafana/grafana.crt
 chgrp -R grafana /etc/letsencrypt/*
 chmod -R g+rx /etc/letsencrypt/*
 chgrp -R grafana /etc/grafana/grafana.crt /etc/grafana/grafana.key
